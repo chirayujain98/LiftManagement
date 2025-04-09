@@ -1,16 +1,39 @@
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Elevator extends Thread {
     private int id;
     private int currentFloor;
-    boolean isRunning;
+    private volatile boolean isRunning;
+    private BlockingQueue<Integer> floorRequest = new LinkedBlockingQueue<>();
 
-    Elevator() {
+    Elevator(int id) {
+        this.id = id;
         isRunning = true;
+    }
+
+    public void addFloorRequest(int floor) {
+        floorRequest.add(floor);
     }
 
     public void run() {
         while (isRunning) {
+            try {
+            Integer targetFloor = floorRequest.take();
+            while(targetFloor != currentFloor) {
+                if(currentFloor < targetFloor) {
+                    currentFloor++;
+                }else{
+                    currentFloor--;
+                }
+                Thread.sleep(500);
+                System.out.println("The lift is at floor " + currentFloor); 
+            }
+            System.out.println("The lift reached destination floor " + currentFloor);
+            Thread.sleep(1000);
+            }catch(InterruptedException e) {
 
+            }
         }
     }
 
