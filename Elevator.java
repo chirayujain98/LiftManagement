@@ -6,14 +6,16 @@ public class Elevator extends Thread {
     private int currentFloor;
     private volatile boolean isRunning;
     private BlockingQueue<Integer> floorRequest = new LinkedBlockingQueue<>();
-
     Elevator(int id) {
         this.id = id;
         isRunning = true;
     }
-
     public void addFloorRequest(int floor) {
         floorRequest.add(floor);
+    }
+
+    public boolean isIdle() {
+        return floorRequest.isEmpty();
     }
 
     public void run() {
@@ -32,7 +34,7 @@ public class Elevator extends Thread {
             System.out.println("The lift reached destination floor " + currentFloor);
             Thread.sleep(1000);
             }catch(InterruptedException e) {
-
+                System.out.println("Exception caught in lift " + e.getMessage());
             }
         }
     }
