@@ -1,9 +1,14 @@
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
-public class ElevatorController {
+public class ElevatorController{
     private List<Elevator> elevatorList;
     private BlockingQueue<PersonRequest> requestQueue;
+
+    public ElevatorController(List<Elevator> list, BlockingQueue<PersonRequest> requests) {
+        this.elevatorList = list;
+        this.requestQueue = requests;
+    }
 
     public void startController(int floor) {
         // Keep assigning requests to best elevator
@@ -11,7 +16,7 @@ public class ElevatorController {
             while(!Thread.currentThread().isInterrupted()) {
                 PersonRequest personRequest = requestQueue.take();
                 Elevator elevator = getBestElevator(personRequest);
-                elevator.addFloorRequest(personRequest.getDestinationFloor());r
+                elevator.addFloorRequest(personRequest.getDestinationFloor());
 
             }
 
@@ -30,6 +35,10 @@ public class ElevatorController {
             }
         }
         return elevatorList.get(0);
+    }
+
+    public void setElevatorList(List<Elevator> list) {
+        this.elevatorList = list;
     }
 
 }

@@ -29,9 +29,9 @@ public class Elevator extends Thread {
                     currentFloor--;
                 }
                 Thread.sleep(500);
-                System.out.println("The lift is at floor " + currentFloor); 
+                System.out.println("The lift of id " + id + "is at floor " + currentFloor); 
             }
-            System.out.println("The lift reached destination floor " + currentFloor);
+            System.out.println("The lift of id " + id + " reached destination floor " + currentFloor);
             Thread.sleep(1000);
             }catch(InterruptedException e) {
                 System.out.println("Exception caught in lift " + e.getMessage());
