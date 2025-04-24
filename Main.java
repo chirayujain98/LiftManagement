@@ -9,6 +9,9 @@ public class Main {
     public static void main(String[] args) {
         BlockingQueue<PersonRequest> requestQueue = new LinkedBlockingQueue<>();
 
+        //Todo: Need to fix an issue which is the lift is not reaching the source floor and completing 
+        // the destination floor.
+
         // Create elevators
         Elevator e1 = new Elevator(1);
         Elevator e2 = new Elevator(2);
@@ -27,11 +30,11 @@ public class Main {
         // Simulate person requests
         Thread requestSimulator = new Thread(() -> {
             Random rand = new Random();
-            for (int i = 0; i < 10; i++) {
-                int from = rand.nextInt(10);
+            for (int i = 0; i < 3; i++) {
+                int from = rand.nextInt(3);
                 int to;
                 do {
-                    to = rand.nextInt(10);
+                    to = rand.nextInt(3);
                 } while (to == from);
 
                 PersonRequest request = new PersonRequest(from, to, requestQueue);

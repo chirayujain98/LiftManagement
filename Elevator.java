@@ -42,5 +42,8 @@ public class Elevator extends Thread {
     public void stopElevator() {
         isRunning = false;
     }
+    public int getEleveatorId() {
+        return this.id;
+    }
 
 }

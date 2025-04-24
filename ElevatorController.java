@@ -16,7 +16,11 @@ public class ElevatorController{
             while(!Thread.currentThread().isInterrupted()) {
                 PersonRequest personRequest = requestQueue.take();
                 Elevator elevator = getBestElevator(personRequest);
+                elevator.addFloorRequest(personRequest.getSourceFloor());
                 elevator.addFloorRequest(personRequest.getDestinationFloor());
+                System.out.println("Assigned Elevator " + elevator.getEleveatorId() +
+                " to person from floor " + personRequest.getSourceFloor() +
+                " to " + personRequest.getDestinationFloor());
 
             }
 
