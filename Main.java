@@ -9,9 +9,6 @@ public class Main {
     public static void main(String[] args) {
         BlockingQueue<PersonRequest> requestQueue = new LinkedBlockingQueue<>();
 
-        //Todo: Need to fix an issue which is the lift is not reaching the source floor and completing 
-        // the destination floor.
-
         // Create elevators
         Elevator e1 = new Elevator(1);
         Elevator e2 = new Elevator(2);
